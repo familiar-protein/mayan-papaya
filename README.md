@@ -1,6 +1,4 @@
-# Project Name
-
-**TriviaBattle**
+# TriviaBattle
 
 ## Team
 
