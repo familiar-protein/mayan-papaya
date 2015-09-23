@@ -1,15 +1,17 @@
 /*
-TriviaWithFriends is a great way to challenge your friends to trivia showdowns! Finally figure out which one of you has more random knowledge of the world! TriviaWithFriends will keep track of your success (or lack of success) answering questions over time, so you can always check-in on your stats. Jump right in and see how you do!
+Inspired by the foundation laid by [TriviaWithFriends](https://github.com/mayan-papaya/mayan-papaya), our fork, TriviaBattle, extends the original game to support real-time multi-player games.
 
-Here is a link to the deployed version of our app: https://triviawithfriends.herokuapp.com/
+TriviaBattle is a great way to challenge your friends to trivia showdowns! Finally figure out which one of you has more random knowledge of the world! TriviaBattle will keep track of your success (or lack of success) answering questions over time, so you can always check-in on your stats. Jump right in and see how you do!
 
-We used the MEAN tech stack to create TriviaWithFriends: Mongoose, Express, Angular, and Node. Challenges during our project included finding the right API, structuring the optimal dynamics for the game, and having user information update appropriately.
+Here is a link to the deployed version of our app: 
+http://triviabattle.herokuapp.com/
+
+We used the MEAN tech stack to create TriviaBattle: Mongoose, Express, Angular, and Node. To implement live, synchronized updates to all players, we used Socket.io.
 
 Please read below for a detailed account of the functionality behind TriviaWithFriends!
 
 
-
-1) ClIENT SIDE:
+1) CLIENT SIDE:
 
 Navigation.js
 Profile.js
