@@ -28,7 +28,6 @@
     };
 
     obj.isAuth = function () {
-      // console.log($window.localStorage.getItem('com.TriviaWithFriends'));
       return !!$window.localStorage.getItem('com.TriviaWithFriends');
     };
 

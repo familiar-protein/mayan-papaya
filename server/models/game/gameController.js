@@ -20,13 +20,8 @@ module.exports = {
   },
 
   startConnection: function(code) {
-    console.log("connection: app is " + app);
-    console.log("connection: app.app is " + app.app);
-    console.log("connection: app.io is " + app.io);
-
     var namespace = app.io.of('/' + code);
     namespace.on('connection', function(socket) {
-      console.log("connection: startConnection " + code);
 
       socket.on('newuser', function(username) {
         gameState[code].userScores[username] = 0;
@@ -35,8 +30,6 @@ module.exports = {
       });
 
       socket.on('initiategame', function() {
-        console.log("Socket: initiategame");
-
         // Select 10 random question numbers for this game
         var questions = [];
         var qHash = {};
@@ -51,8 +44,6 @@ module.exports = {
             numSelected++;
           }
         }
-        console.log("initiategame: questions ");
-        console.log(questions);
 
         namespace.emit('startgame', questions);
       });
@@ -72,7 +63,6 @@ module.exports = {
             // We've played through the end of the game; broadcast
             // the end and clean up game state for this game.
             namespace.emit('endgame', gameState[code].userScores);
-            // delete gameState[code];
           } else {
             namespace.emit('nextq', gameState[code].userScores);
           }
@@ -81,7 +71,6 @@ module.exports = {
       });
 
       socket.on('scoreupdate', function(data) {
-        console.log("Socket: scoreupdate");
         namespace.emit('scoreupdate', data);
       });
     }); 
@@ -108,10 +97,7 @@ module.exports = {
   joinGame: function(req, res) {
     var code = req.body.code;
 
-    console.log("gameController: joinGame req for " + code);
-
     if (gameState[code]) {
-      console.log("joinGame: user list for " + code + " is " + gameState[code].userScores);
       res.send(200);
     } else {
       res.send(404);

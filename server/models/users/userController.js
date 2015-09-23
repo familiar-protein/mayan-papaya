@@ -81,7 +81,6 @@ module.exports = {
     var findUser = Q.nbind(User.findOne, User);
     findUser({username: username})
       .then(function (user) {
-        console.log(user);
         if (!user) {
           res.statusCode = 403;
           res.json({error: 'Incorrect username or password'});
@@ -114,7 +113,6 @@ module.exports = {
     // check to see if user already exists
     findOne({username: username})
       .then(function(user) {
-        console.log('^^^^^^^^^^^', user);
         if (user) {
           res.statusCode = 403;
           res.json({error: 'Username taken'});
@@ -125,18 +123,15 @@ module.exports = {
             username: username,
             password: password
           };
-          console.log('``````````', newUser);
           return create(newUser);
         }
       })
       .then(function (user) {
-        console.log('got here: then', user);
         // create token to send back for auth
         var token = jwt.encode(user, secret);
         res.json({token: token});
       })
       .fail(function (error) {
-        console.log('Signup error:', error);
         res.statusCode = 500;
         res.json({error: 'Server error'});
       });
@@ -149,8 +144,6 @@ module.exports = {
     // check to see if that user exists in the database
     var token = req.headers['x-access-token'];
 
-    console.log("checkAuth called.");
-
     if (!token) {
       res.statusCode = 403;
       res.json({error: 'No token provided'});
@@ -160,7 +153,6 @@ module.exports = {
       findUser({username: user.username})
         .then(function (foundUser) {
           if (foundUser) {
-            console.log("checkAuth: found user " + user.username);
             req.user = foundUser;
             // res.sendStatus(200);
             next();
@@ -176,16 +168,14 @@ module.exports = {
   },
 
   getUserData: function(req, res) {
-    console.log(req.body);
     var username = req.body.username;
     var findUser = Q.nbind(User.findOne, User);
-    // console.log('username received: ' + username);
+
     if(!username) {
       res.sendStatus(401);
     }
     findUser({username: username})
       .then(function(user) {
-        console.log("getUserData: " + user);
         res.json(JSON.stringify(user));
       });
   }

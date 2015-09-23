@@ -33,13 +33,6 @@ if (!module.parent) {
   io.attach(server);
 }
 
-console.log("app.js: app is " + app);
-console.log("app.js: io is " + io);
-
-// module.exports = {
-//   app: app,
-//   io: io
-// };
 
 exports.app = app;
 exports.io = io;

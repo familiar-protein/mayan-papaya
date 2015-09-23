@@ -117,8 +117,6 @@
       // set a flag so that we show a message that we are waiting for
       // other players to complete this round
       $scope.waitingForNext = true;
-
-      // $scope.nextLoc();
     };
 
 
@@ -142,11 +140,6 @@
 
         if($scope.counter === 0) {
           $scope.socket.emit('finishedq', {username: $scope.username, score: $scope.score});
-
-          // TODO: change to have a socket wait for
-          // signal from server to move on to next Q
-          //   $scope.nextLoc();
-          //   $scope.setCountdown();
         }
       }, 1000);
     };
@@ -160,45 +153,27 @@
       $scope.socket.emit('newuser', $scope.username);
 
       $scope.socket.on('userlist', function(userList) {
-        console.log('Socket : On : userlist: ' + userList);
         $scope.userScores = userList;
         $scope.$apply();
       });
-
-      // initialize the score for each new user to zero.
-      // $scope.socket.on('newuser', function(username) {
-      //   console.log("Socket: newuser " + username);
-      //   $scope.userScores[username] = 0;
-      //   $scope.$apply();
-      // });
       
       $scope.socket.on('startgame', function(questions) {
-        console.log("Socket: startgame");
-        console.log(questions);
-
         $scope.questionNums = questions;
         $scope.startGame();
       });
 
       $scope.socket.on('scoreupdate', function(data) {
-        console.log("Socket: scoreupdate");
         $scope.userScores[data.username] = data.score;
         $scope.$apply();
       });
 
       $scope.socket.on('nextq', function(data) {
-        console.log("Socket: nextq");
         $scope.userScores = data;
-        // ??? $scope.$apply() ?
-
         $scope.nextLoc();
       });
 
       $scope.socket.on('endgame', function(data) {
-        console.log("Socket: endgame");
         $scope.userScores = data;
-        // ??? $scope.$apply() ?
-
         $scope.endGame();
       });
     };
@@ -207,19 +182,10 @@
     // on success, we receive a code for our game room / socket namespace
     $scope.newGame = function() {
       return $http.get('/api/game').success(function(data) {
-
-        // TODO: handle intial game setup ...
-        // - set up socket connection?
-        // - update the view?
-        // * set some state info that indicates that this user
-        // initiated the game -> gets a start button to start gameplay
         $scope.code = data.code;
         $scope.initiatedGame = true;
         $scope.validGameRequest = true;
-        console.log("TriviaController: newGame " + $scope.code + " initiatedGame is " + $scope.initiatedGame);
-
         $scope.setupSocket();
-
       });
     };
 
@@ -229,15 +195,11 @@
 
       return $http.put('/api/game/join', {code: $scope.code})
       .success(function(data) {
-        console.log("TriviaController: joinGame " + $scope.code);
         $scope.initiatedGame = false;
         $scope.validGameRequest = true;
 
         $scope.setupSocket();
       }).error(function(data) {
-        // TODO: handle the error and prevent the user from being redirected
-        // to the start game view.
-        console.log("TriviaController: joinGame error with code " + $scope.code);
         $scope.invalidGameRequest = true;
       });
     };
@@ -247,15 +209,9 @@
     };
 
     $scope.startGame = function() {
-      // start timers ...
-
-      // if ($scope.initiatedGame) {
-      //   $scope.socket.emit('startgame');
-      // }
       // initialize the question state: use the first question number
       $scope.questionCount = 0;
       $scope.navLoc = $scope.questionNums[$scope.questionCount];
-      console.log("TriviaController: startGame navLoc " + $scope.navLoc);
 
       $scope.gameDataInit();
       $scope.setCountdown();
@@ -269,8 +225,6 @@
     $scope.highScore = function() {
       var currHighest;
 
-      console.log("Calculating highScore");
-
       for (var key in $scope.userScores) {
         if (currHighest === undefined) {
           currHighest = [key, $scope.userScores[key]];
@@ -283,8 +237,6 @@
     };
 
     $scope.endGame = function() {
-      // TODO: this part probably needs to change to wait
-      // for server to indicate end game
       $scope.updateUser({
         username: $scope.username,
         score: $scope.score,
