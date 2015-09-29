@@ -34,17 +34,19 @@
     <div class="row twf-header">
       <div class="col-md-8 col-md-offset-2">
 
+        <a href="/#/home">
         <img src="assets/triviabattle-logo.png" class="header-title"></img>
+        </a>
 
         <ul class="nav nav-pills"
-          ng-controller="NavigationController"
-          ng-show="show()">
-          <!-- home tab not used atm -->
-          <!-- <li ng-class="getClass('home')" role="presentation"><a href="/#/home">Home</a></li> -->
-          <li role="presentation"><a ng-class="getClass('profile')" class="btn btn-default btn-flat" href="/#/profile">Profile</a></li>
-          <li role="presentation"><a ng-class="getClass('stats')" class="btn btn-default btn-flat" href="/#/stats">Stats</a></li>
-          <li role="presentation"><a ng-class="getClass('trivia')" class="btn btn-default btn-flat" href="/#/trivia">Trivia</a></li>
-          <li class="pull-right pointer" role="presentation"><a class="btn btn-default btn-flat" ng-click="logout();">Logout</a></li>
+          ng-controller="NavigationController">
+          <li role="presentation"><a ng-class="getClass('home')" class="btn btn-default btn-flat" href="/#/home" ng-show="show()">Home</a></li>
+          <li role="presentation"><a ng-class="getClass('profile')" class="btn btn-default btn-flat" href="/#/profile" ng-show="show()">Profile</a></li>
+          <li role="presentation"><a ng-class="getClass('stats')" class="btn btn-default btn-flat" href="/#/stats" ng-show="show()">Stats</a></li>
+          <li role="presentation"><a ng-class="getClass('trivia')" class="btn btn-default btn-flat" href="/#/trivia" ng-show="show()">Trivia</a></li>
+          <li class="pull-right pointer" role="presentation"><a class="btn btn-default btn-flat" ng-click="logout();" ng-show="show()">Logout</a></li>
+          <li class="pull-right pointer" role="presentation"><a class="btn btn-default btn-flat" href="/#/signin" ng-show="isHome()">Sign In</a></li>
+          <li class="pull-right pointer" role="presentation"><a class="btn btn-default btn-flat" href="/#/signup" ng-show="isHome()">Sign Up</a></li>
         </ul>
       </div>
     </div>

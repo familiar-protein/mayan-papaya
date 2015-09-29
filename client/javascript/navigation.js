@@ -15,10 +15,19 @@
 
     //hack for hiding nav on signin or signup
     $scope.show = function() {
-      if($location.$$url === '/signin' || $location.$$url === '/signup') {
+      if($location.$$url === '/signin' || $location.$$url === '/signup' 
+         || $location.$$url === '/home') {
         return false;
       } else {
         return true;
+      }
+    };
+
+    $scope.isHome = function() {
+      if ($location.$$url === '/home') {
+        return true;
+      } else {
+        return false;
       }
     };
 

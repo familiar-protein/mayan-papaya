@@ -1,51 +1,14 @@
 <!-- home view html here -->
 
-<div ng-controller="HomeController">
-
-  <div class="home-info-wrapper">
-
-    <div class="row home-info">
-
-      <div class="col-md-4 col-md-offset-2">
-        <!-- inner rows and cols -->
-
-        <h4 class="text-left">Recent Activity</h4>
-        <table class="table table-hover text-left">
-          <tr ng-repeat="n in activity">
-            <td>
-              {{n.type}}
-            </td>
-            <td>
-              {{n.score}}
-            </td>
-            <td class="text-right">
-              <button class="btn btn-info btn-xs">Play</button>
-            </td>
-          </tr>
-        </table>
-
-      </div>
-
-      <div class="col-md-4">
-        <!-- inner rows and cols -->
-
-        <h4 class="text-left">Path Progress</h4>
-        <table class="table table-hover text-left">
-          <tr ng-repeat="n in progress">
-            <td>
-              {{n.achievement}}
-            </td>
-            <td>
-              {{n.ratio}}
-            </td>
-          </tr>
-        </table>
-
-      </div>
-
-    </div>
-
+<div class="bg-img"></div>
+<div class="container">
+  <div class="row text-center home-bottom">
+    <h3>
+      Are you ready to battle for friends for fame and fortune ... or at least bragging rights?
+    </h3>
+    <h3>
+      Test your trivia knowledge with TriviaBattle!
+    </h3>
   </div>
-
-
 </div>
+

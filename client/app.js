@@ -12,11 +12,11 @@
   function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $stateProvider
-      // .state('home', {
-      //   url: '/home',
-      //   templateUrl: 'views/home.html',
-      //   data: { publicallyAccessible: false }
-      // })
+      .state('home', {
+        url: '/home',
+        templateUrl: 'views/home.html',
+        data: { publicallyAccessible: true }
+      })
       .state('trivia', {
         url: '/trivia',
         templateUrl: 'views/trivia.html',
@@ -74,7 +74,7 @@
         templateUrl: 'views/signin.html',
         data: { publicallyAccessible: true }
       });
-    $urlRouterProvider.otherwise('profile');
+    $urlRouterProvider.otherwise('home');
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
